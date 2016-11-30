@@ -11,15 +11,13 @@ module Billplz
 
     def get
       requires!(@payload, :bill_id)
-      @api_url = "#{@api_url}/#{@payload[:bill_id]}"
-      request(:get, nil)
+      request(:get, nil, "#{@api_url}#{@payload[:bill_id]}")
       JSON.parse(@response.body) if success?
     end
 
     def delete
       requires!(@payload, :bill_id)
-      @api_url = "#{@api_url}/#{@payload[:bill_id]}"
-      request(:delete, nil)
+      request(:delete, nil, "#{@api_url}#{@payload[:bill_id]}")
     end
   end
 end

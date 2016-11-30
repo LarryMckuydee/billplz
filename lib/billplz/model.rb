@@ -9,7 +9,7 @@ module Billplz
       @payload  = payload
     end
 
-    def request(method, body)
+    def request(method, body, url=endpoint.request_uri)
       headers = {
         "Authorization" => "Basic " + Base64.encode64(Billplz.configuration.api_key + ":").strip,
         "Content-Type"  => "application/json",
@@ -19,16 +19,16 @@ module Billplz
       @response = case method
       when :get
         raise ArgumentError, "GET requests do not support a request body" if body
-        http.get(endpoint.request_uri, headers)
+        http.get(url, headers)
       when :post
-        http.post(endpoint.request_uri, body.to_json, headers)
+        http.post(url, body.to_json, headers)
       when :put
-        http.put(endpoint.request_uri, body.to_json, headers)
+        http.put(url, body.to_json, headers)
       when :patch
-        http.patch(endpoint.request_uri, body, headers)
+        http.patch(url, body, headers)
       when :delete
         raise ArgumentError, "DELETE requests do not support a request body" if body
-        http.delete(endpoint.request_uri, headers)
+        http.delete(url, headers)
       else
         raise ArgumentError, "Unsupported request method #{method.to_s.upcase}"
       end
