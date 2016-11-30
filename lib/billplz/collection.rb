@@ -1,7 +1,7 @@
 module Billplz
   class Collection < Model
    def fragment
-     '/collections'
+     'collections'
    end
 
 

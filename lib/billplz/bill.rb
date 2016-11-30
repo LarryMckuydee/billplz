@@ -1,7 +1,7 @@
 module Billplz
   class Bill < Model
      def fragment
-       '/bills'
+       'bills'
      end
 
     def create
