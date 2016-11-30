@@ -5,7 +5,7 @@ module Billplz
     attr_accessor :response
 
     def initialize(payload={})
-      @api_url  = self.api_url
+      @api_url  = Billplz.configuration.api_url
       @payload  = payload
     end
 
@@ -45,7 +45,7 @@ module Billplz
     end
 
     def endpoint
-      URI.parse(@api_url)
+      URI.parse("#{@api_url}#{fragment}")
     end
 
     def success?
@@ -54,6 +54,10 @@ module Billplz
 
     def parsed_json
       JSON.parse(@response.body)
+    end
+
+    def fragment
+      raise NotImplementedError
     end
 
     private

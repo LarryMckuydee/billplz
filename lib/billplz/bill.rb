@@ -1,6 +1,8 @@
 module Billplz
   class Bill < Model
-    self.api_url = 'https://www.billplz.com/api/v3/bills'
+     def fragment
+       '/bills'
+     end
 
     def create
       requires!(@payload, :collection_id, :email, :name, :amount, :callback_url)
