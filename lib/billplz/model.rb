@@ -9,7 +9,7 @@ module Billplz
       @payload  = payload
     end
 
-    def request(method, body, params = nil)
+    def request(method, body, params = '')
       headers = {
         "Authorization" => "Basic " + Base64.encode64(Billplz.configuration.api_key + ":").strip,
         "Content-Type"  => "application/json",
@@ -17,7 +17,7 @@ module Billplz
       }
 
       url = endpoint.request_uri
-      url = "#{url}/#{params}" if params.presence
+      url = "#{url}/#{params}"
 
       @response = case method
       when :get
